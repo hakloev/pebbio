@@ -1,17 +1,30 @@
-from flask import Flask
+from flask import Flask, render_template
 import RPi.GPIO as GPIO
 app = Flask(__name__)
 
 GPIO.setmode(GPIO.BCM)
 
+pins = {
+	23: {'name': 'led-light', 'state': False},
+	12: {'name': 'temperature-sensor', 'state': False} #TODO: this is wrong, just placeholder text
+}
+
+for pin in pins:
+	GPIO.setup(pin, GPIO.OUT) #TODO: in for temp-sensor
+	GPIO.output(pin, False)
+
 @app.route("/")
 def hello():
-	return "Hello, Verden!"
+	for pin in pins:
+		pins[pin]['state'] = GPIO.input(pin)
+	templateData = {
+		'pins': pins
+	}
+	return render_template('index.html', **templateData)
 
 @app.route("/led/<int:pin>/<state>")
 def changePin(pin, state):
 	pinToChange = pin
-	GPIO.setup(23, GPIO.OUT) # check this one, make dict or something
 	if state == "on":
 		GPIO.output(pinToChange, True)
 	if state == "off":

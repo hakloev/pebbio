@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<head><title>Status:</title></head>
+
+<body>
+	<h1>Pin status</h1>
+	
+	{% for pin in pins %}
+	<p>Pin {{ pins[pin].name }} is {{ pins[pin].state }}</p>
+	{% endfor %}
+
+	
+</body>

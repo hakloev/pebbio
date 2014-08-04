@@ -11,7 +11,7 @@ def hello():
 @app.route("/led/<int:pin>/<state>")
 def changePin(pin, state):
 	pinToChange = pin
-	GPIO.setup(23, GPIO.OUT) # check this one, make dict or something like mattric richardson
+	GPIO.setup(23, GPIO.OUT) # check this one, make dict or something
 	if state == "on":
 		GPIO.output(pinToChange, True)
 	if state == "off":

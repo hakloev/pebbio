@@ -18,5 +18,6 @@ def changePin(pin, state):
 		GPIO.output(pinToChange, False)
 	
 	return "Worked, %s set %s" % (pin, state)
+
 if __name__ == "__main__":
 	app.run(host='0.0.0.0', port=80, debug=True)
